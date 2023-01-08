@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  weather_entrypoint:
+    build:
+      context: ./weather_entrypoint
+      dockerfile: ./Dockerfile
+#      args:
+#        STATIC_URL: "/static/"
+#    command: gunicorn main:app --bind localhost:82 --worker-class aiohttp.GunicornWebWorker
+#    command: python main.py
+#    command: supervisord -n -c /etc/supervisor/supervisord.conf
+    environment:
+      DEBUG: "True"
+    ports:
+      - "82:82"
+#      - "81:81"
+#      - "81:82"
+#      - "82:81"
+    restart: always
+
+  front:
+    image: nginx
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    #    command: rm /etc/nginx/conf.d
+    ports:
+      - "81:81"
+    volumes:
+      - ./.htpasswd:/etc/nginx/.htpasswd
+#      - ./front.access.log:/var/log/nginx/front.access.log
+#      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+#      - static:/opt/app/public/static
+#      - ./public:/opt/app/public
+    environment:
+      DEBUG: "True"
+    restart: always

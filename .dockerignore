@@ -1,0 +1,26 @@
+/env
+.env
+/venv
+/.venv
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+.docker
+
+# Python
+__pycache__
+
+# Translations
+*.mo
+*.pot
+
+# JetBrains
+.idea
+
+db.sqlite3
+db.sqlite
+images
+static/*
